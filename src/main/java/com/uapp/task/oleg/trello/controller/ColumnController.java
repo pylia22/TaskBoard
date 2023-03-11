@@ -2,11 +2,6 @@ package com.uapp.task.oleg.trello.controller;
 
 import com.uapp.task.oleg.trello.dto.ColumnDto;
 import com.uapp.task.oleg.trello.service.ColumnService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,7 +20,7 @@ public class ColumnController {
 
     @PostMapping
     public ResponseEntity<String> create(@Valid @RequestBody ColumnDto columnDto) {
-        columnService.create(columnDto);
+        columnService.save(columnDto);
         return new ResponseEntity<>("New column has been created", CREATED);
     }
 

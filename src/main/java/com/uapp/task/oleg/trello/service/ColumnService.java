@@ -18,11 +18,11 @@ public class ColumnService {
     private final ColumnRepository columnRepository;
     private final ColumnMapper columnMapper;
 
-    public void create(ColumnDto columnDto) {
+    public void save(ColumnDto columnDto) {
         String columnName = columnDto.getName();
 
         columnRepository.findColumnByName(columnName).ifPresent(optionalColumn -> {
-            throw new DuplicatedNameException(columnName);
+            throw new DuplicatedNameException("Column name " + columnName + " already exists");
         });
         Column column = columnMapper.toColumn(columnDto);
         columnRepository.save(column);
@@ -47,5 +47,12 @@ public class ColumnService {
             throw new ColumnNotFoundException();
         }
         columnRepository.deleteById(id);
+    }
+
+    public void checkIfColumnPresent(int id) {
+        Optional<Column> optionalColumn = columnRepository.findById(id);
+        if (optionalColumn.isEmpty()) {
+            throw new ColumnNotFoundException();
+        }
     }
 }
