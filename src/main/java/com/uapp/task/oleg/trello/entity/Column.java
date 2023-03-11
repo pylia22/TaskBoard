@@ -1,7 +1,6 @@
 package com.uapp.task.oleg.trello.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,13 +9,14 @@ import javax.validation.constraints.NotNull;
 @Table(name = "columns")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Column {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
-
-    @NotNull
     private String name;
     private int position;
     private int userId;
